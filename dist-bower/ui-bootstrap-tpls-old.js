@@ -211,7 +211,7 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
 
 // The accordion directive simply sets up the directive controller
 // and adds an accordion CSS class to itself element.
-.directive('uibAccordion', function () {
+.directive('accordion', function () {
   return {
     restrict:'EA',
     controller:'AccordionController',
@@ -222,9 +222,9 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
 })
 
 // The accordion-group directive indicates a block of html that will expand and collapse in an accordion
-.directive('uibAccordionGroup', function() {
+.directive('accordionGroup', function() {
   return {
-    require:'^uibAccordion',         // We need this directive to be inside an accordion
+    require:'^accordion',         // We need this directive to be inside an accordion
     restrict:'EA',
     transclude:true,              // It transcludes the contents of the directive into the template
     replace: true,                // The element containing the directive will be replaced with the template
@@ -261,13 +261,13 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
 // <accordion-group>
 //   <accordion-heading>Heading containing HTML - <img src="..."></accordion-heading>
 // </accordion-group>
-.directive('uibAccordionHeading', function() {
+.directive('accordionHeading', function() {
   return {
     restrict: 'EA',
     transclude: true,   // Grab the contents to be used as the heading
     template: '',       // In effect remove this element!
     replace: true,
-    require: '^uibAccordionGroup',
+    require: '^accordionGroup',
     link: function(scope, element, attr, accordionGroupCtrl, transclude) {
       // Pass the heading to the accordion-group controller
       // so that it can be transcluded into the right place in the template
@@ -283,9 +283,9 @@ angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse'])
 //   <div class="accordion-heading" ><a ... accordion-transclude="heading">...</a></div>
 //   ...
 // </div>
-.directive('uibAccordionTransclude', function() {
+.directive('accordionTransclude', function() {
   return {
-    require: '^uibAccordionGroup',
+    require: '^accordionGroup',
     link: function(scope, element, attr, controller) {
       scope.$watch(function() { return controller[attr.accordionTransclude]; }, function(heading) {
         if ( heading ) {
